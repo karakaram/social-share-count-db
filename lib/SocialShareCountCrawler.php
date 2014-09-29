@@ -22,7 +22,7 @@ class SocialShareCountCrawler
     public function requestTwitter($url)
     {
         $postUrl = rawurlencode($url);
-        $requestUrl = 'http://api.b.st-hatena.com/entry.count?url=' . $postUrl;
+        $requestUrl = 'http://urls.api.twitter.com/1/urls/count.json?url=' . $postUrl;
         $count = $this->getContentsWithCurl($requestUrl);
         return (int)$count;
     }
