@@ -24,8 +24,8 @@ class SocialShareCountCrawler
         $postUrl = rawurlencode($url);
         $requestUrl = 'http://urls.api.twitter.com/1/urls/count.json?url=' . $postUrl;
         $json = $this->getContentsWithCurl($requestUrl);
-        $count = json_decode($json, true);
-        return (int)$count;
+        $twitter = json_decode($json, true);
+        return (isset($twitter['count'])) ? (int)$twitter['count'] : 0;
     }
 
     public function requestFacebook($url)
