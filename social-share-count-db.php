@@ -135,5 +135,14 @@ function get_social_count($postId = null)
     }
 
     $count = get_post_meta($postId, SocialShareCountDB::POST_META, true);
+
+    if ($count == null) {
+        $count = array();
+        $count[SocialShareCountDB::TWITTER] = 0;
+        $count[SocialShareCountDB::FACEBOOK] = 0;
+        $count[SocialShareCountDB::GOOGLE_PLUS] = 0;
+        $count[SocialShareCountDB::HATENA_BOOKMARK] = 0;
+    }
+
     return $count;
 }
