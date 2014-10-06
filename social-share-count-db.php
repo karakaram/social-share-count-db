@@ -90,7 +90,12 @@ class SocialShareCountDB
 
     public function savePost($postId)
     {
-        add_post_meta($postId, self::POST_META, null, true);
+        $count = array();
+        $count[SocialShareCountDB::TWITTER] = 0;
+        $count[SocialShareCountDB::FACEBOOK] = 0;
+        $count[SocialShareCountDB::GOOGLE_PLUS] = 0;
+        $count[SocialShareCountDB::HATENA_BOOKMARK] = 0;
+        add_post_meta($postId, self::POST_META, $count, true);
     }
 
     public function deletePost($postId)
