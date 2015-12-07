@@ -2,7 +2,7 @@
 /*
 Plugin Name: Social Share Count DB
 Description: This plugin saves the number of shares on social networking services in the DataBase. Supported service is Twitter, Facebook, Google Plus, and Hatena Bookmark.
-Version: 0.1
+Version: 0.2
 Author: Karakaram
 Author URI: http://www.karakaram.com
 License: GPL2 or later

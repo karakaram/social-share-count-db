@@ -22,7 +22,7 @@ class SocialShareCountCrawler
     public function requestTwitter($url)
     {
         $postUrl = rawurlencode($url);
-        $requestUrl = 'http://urls.api.twitter.com/1/urls/count.json?url=' . $postUrl;
+        $requestUrl = 'http://jsoon.digitiminimi.com/twitter/count.json?url=' . $postUrl;
         $json = $this->getContentsWithCurl($requestUrl);
         $twitter = json_decode($json, true);
         return (isset($twitter['count'])) ? (int)$twitter['count'] : 0;
