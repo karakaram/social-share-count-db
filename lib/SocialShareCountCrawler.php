@@ -91,8 +91,8 @@ class SocialShareCountCrawler
 
         $curl_results = curl_exec($curl);
 
-        if (curl_error($curl)) {
-            error_log(__FUNCTION__ . '' . $url . ' ' . curl_error($curl));
+        if (false === $curl_results) {
+            error_log('[ERROR] ' . __FILE__ . ' ' . __FUNCTION__ . ' ' . $url . ' ' . curl_error($curl));
         }
 
         curl_close ($curl);
