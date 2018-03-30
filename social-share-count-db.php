@@ -117,12 +117,16 @@ class SocialShareCountDB
             $query->the_post();
 
             $url = get_permalink($post->ID);
+            $url_without_ssl = str_replace('https', 'http', $url);
 
             $count = array();
             $count[SocialShareCountDB::TWITTER] = $crawler->requestTwitter($url);
             $count[SocialShareCountDB::FACEBOOK] = $crawler->requestFacebook($url);
+            $count[SocialShareCountDB::FACEBOOK] += $crawler->requestFacebook($url_without_ssl);
             $count[SocialShareCountDB::GOOGLE_PLUS] = $crawler->requestGooglePlus($url);
+            $count[SocialShareCountDB::GOOGLE_PLUS] += $crawler->requestGooglePlus($url_without_ssl);
             $count[SocialShareCountDB::HATENA_BOOKMARK] = $crawler->requestHatenaBookmark($url);
+            $count[SocialShareCountDB::HATENA_BOOKMARK] += $crawler->requestHatenaBookmark($url_without_ssl);
 
             update_post_meta($post->ID, SocialShareCountDB::POST_META, $count);
 
