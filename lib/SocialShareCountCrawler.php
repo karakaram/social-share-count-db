@@ -31,10 +31,11 @@ class SocialShareCountCrawler
     public function requestFacebook($url)
     {
         $postUrl = rawurlencode($url);
-        $url = 'http://graph.facebook.com/' . $postUrl;
+        # FIXME
+        $url = 'https://graph.facebook.com/v2.12?fields=engagement&id=' . $postUrl . '&access_token=appid|appsecret';
         $json = $this->getContentsWithCurl($url);
         $facebook = json_decode($json, true);
-        return isset($facebook['shares']) ? (int)$facebook['shares'] : 0;
+        return isset($facebook['engagement']) ? array_sum($facebook['engagement']) : 0;
     }
 
 
