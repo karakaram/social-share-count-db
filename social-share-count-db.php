@@ -54,7 +54,7 @@ class SocialShareCountDB
         }
 
         $query = new WP_Query();
-        $query->query(array('post_type' => 'post', 'posts_per_page' => -1, 'order' => 'ASC'));
+        $query->query(array('post_type' => 'post', 'posts_per_page' => -1));
 
         $count = array();
         $count[SocialShareCountDB::TWITTER] = 0;
@@ -80,7 +80,7 @@ class SocialShareCountDB
         global $post;
 
         $query = new WP_Query();
-        $query->query(array('post_type' => 'post', 'posts_per_page' => -1, 'order' => 'ASC'));
+        $query->query(array('post_type' => 'post', 'posts_per_page' => -1));
 
         while ($query->have_posts()) {
             $query->the_post();
@@ -111,7 +111,7 @@ class SocialShareCountDB
 
         $current_page = get_option(self::CURRENT_PAGE_OPTION);
         $query = new WP_Query();
-        $query->query(array('post_type' => 'post', 'paged' => $current_page, 'posts_per_page' => self::PER_PAGE, 'order' => 'ASC'));
+        $query->query(array('post_type' => 'post', 'paged' => $current_page, 'posts_per_page' => self::PER_PAGE, 'order' => array('ID' => 'ASC')));
 
         $crawler = new SocialShareCountCrawler();
 
