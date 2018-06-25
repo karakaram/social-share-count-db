@@ -38,35 +38,6 @@ class SocialShareCountCrawler
         return isset($facebook['engagement']) ? array_sum($facebook['engagement']) : 0;
     }
 
-
-    public function requestGooglePlus($url)
-    {
-        $curl = curl_init();
-
-        curl_setopt($curl, CURLOPT_URL, "https://clients6.google.com/rpc");
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, '[{"method":"pos.plusones.get","id":"p","params":{"nolog":true,"id":"' . $url . '","source":"widget","userId":"@viewer","groupId":"@self"},"jsonrpc":"2.0","key":"p","apiVersion":"v1"}]');
-        curl_setopt($curl, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
-        curl_setopt($curl, CURLOPT_FAILONERROR, true);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
-        curl_setopt($curl, CURLOPT_TIMEOUT, $this->timeout);
-
-        $json = curl_exec($curl);
-
-        if (curl_error($curl)) {
-            error_log(__FUNCTION__ . $curl);
-        }
-
-        curl_close ($curl);
-
-        $googlePlus = json_decode($json, true);
-
-        return isset($googlePlus[0]['result']['metadata']['globalCounts']['count']) ? (int)$googlePlus[0]['result']['metadata']['globalCounts']['count'] : 0;
-    }
-
     public function requestHatenaBookmark($url)
     {
         $postUrl = rawurlencode($url);
